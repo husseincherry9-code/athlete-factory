@@ -5,11 +5,11 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --color-brand: #FFD600;       /* الأصفر الأساسي */
+  --color-brand-dark: #E6C000;  /* عند تمرير الماوس */
+  --color-brand-light: #FFF8D6; /* خلفيات فاتحة */
+  --color-brand-deep: #8A6D00;  /* نص ذهبي داكن مقروء على الأبيض */
 }
 
 @media (prefers-color-scheme: dark) {

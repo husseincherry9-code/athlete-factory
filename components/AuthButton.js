@@ -11,10 +11,7 @@ export default function AuthButton() {
   const router = useRouter()
 
   useEffect(() => {
-    // المستخدم الحالي عند تحميل الصفحة
     supabase.auth.getUser().then(({ data }) => setUser(data.user))
-
-    // متابعة الدخول والخروج لحظيًا
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
     })
@@ -28,13 +25,14 @@ export default function AuthButton() {
   }
 
   if (!user) {
-    return <Link href="/login" className="hover:text-orange-600">Login</Link>
+    return <Link href="/login" className="hover:text-brand">Login</Link>
   }
 
   return (
-    <div className="flex items-center gap-3">
-      <span className="hidden text-gray-500 sm:inline">{user.email}</span>
-      <button onClick={handleLogout} className="hover:text-orange-600">Logout</button>
+    <div className="flex items-center gap-4">
+        <Link href="/orders" className="hover:text-brand">Orders</Link>
+      <span className="hidden normal-case text-gray-400 lg:inline">{user.email}</span>
+      <button onClick={handleLogout} className="uppercase hover:text-brand">Logout</button>
     </div>
   )
 }

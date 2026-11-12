@@ -38,7 +38,9 @@ export default function LoginPage() {
       return
     }
 
-    router.push('/')
+    // الرجوع للصفحة المطلوبة (روابط داخلية فقط، لمنع التحويل لمواقع خارجية)
+    const next = new URLSearchParams(window.location.search).get('next')
+    router.push(next && next.startsWith('/') && !next.startsWith('//') ? next : '/')
     router.refresh()
   }
 
@@ -60,7 +62,7 @@ export default function LoginPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 outline-none focus:border-orange-600"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 outline-none focus:border-brand"
               placeholder="you@example.com"
             />
           </div>
@@ -73,7 +75,7 @@ export default function LoginPage() {
               minLength={6}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 outline-none focus:border-orange-600"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 outline-none focus:border-brand"
               placeholder="At least 6 characters"
             />
           </div>
@@ -91,7 +93,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-lg bg-orange-600 py-2.5 font-semibold text-white transition hover:bg-orange-700 disabled:opacity-60"
+            className="w-full rounded-lg bg-brand py-2.5 font-semibold text-black transition hover:bg-brand-dark disabled:opacity-60"
           >
             {loading ? 'Please wait...' : isLogin ? 'Log in' : 'Sign up'}
           </button>
@@ -104,7 +106,7 @@ export default function LoginPage() {
               setMode(isLogin ? 'signup' : 'login')
               setMessage(null)
             }}
-            className="font-semibold text-orange-600 hover:underline"
+            className="font-semibold text-brand-deep hover:underline"
           >
             {isLogin ? 'Sign up' : 'Log in'}
           </button>
